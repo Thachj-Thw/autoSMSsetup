@@ -72,10 +72,10 @@ class autoSMSSerial:
         len_sms = len(sms)
         for i, b in enumerate(sms, start=1):
             self.Serial.write(b.encode())
-            self.Serial.read()
+            self.Serial.read(1)
             yield int((i / len_sms) * 100)
         self.Serial.write(b'\x1A')
-        self.Serial.read()    # waitting for end
+        self.Serial.read(1)    # waitting for end
         sleep(.5)
     
     def read_phone_number(self) -> str:
@@ -99,9 +99,9 @@ class autoSMSSerial:
         len_pn = len(phone_number)
         for i, b in enumerate(phone_number, start=1):
             self.Serial.write(b.encode())
-            self.Serial.read()
+            self.Serial.read(1)
             yield int((i / len_pn) * 100)
         self.Serial.write(b'\x0D')
-        self.Serial.read()    # waitting for end
+        self.Serial.read(1)    # waitting for end
         sleep(.5)
  
