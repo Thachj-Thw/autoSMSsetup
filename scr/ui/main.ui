@@ -365,6 +365,13 @@
                 </property>
                </widget>
               </item>
+              <item alignment="Qt::AlignRight">
+               <widget class="QLabel" name="lb_count">
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>

@@ -25,6 +25,7 @@ class Main(QMainWindow):
         self.btn_write_phone.clicked.connect(self._on_write_phone_clicked)
         self.btn_read_sms.clicked.connect(self._on_read_sms_clicked)
         self.btn_write_sms.clicked.connect(self._on_write_sms_clicked)
+        self.plain_content.textChanged.connect(lambda: self.lb_count.setText(str(len(self.plain_content.toPlainText()))))
 
         self._thread = None
         self.ports = set(autoSMSSerial.get_ports_name())
@@ -139,7 +140,7 @@ class Main(QMainWindow):
         self._thread.start()
     
     def _read_sms_success(self, sms):
-        self.plain_content.setPlaceText(sms)
+        self.plain_content.setPlainText(sms)
         self._stop_process()
     
     def _on_write_sms_clicked(self):
@@ -222,7 +223,6 @@ class Worker(QThread):
 
 
 if __name__ == "__main__":
-    # module.hide_console()
     module.alert_excepthook()
     app = QApplication(sys.argv)
     main = Main()
