@@ -13,6 +13,7 @@ class autoSMSSerial:
     READ_PHONE  = b'\x05'
     END_SMS     = b'\x1A'
     END_PHONE   = b'\x0D'
+    BAUDRATE   = 115200
 
     @staticmethod
     def get_ports() -> list:
@@ -28,7 +29,7 @@ class autoSMSSerial:
     def __init__(self, port = None):
         self.ports = self.get_ports()
         if port:
-            self.Serial = serial.Serial(port, 9600)
+            self.Serial = serial.Serial(port, self.BAUDRATE)
             self.Serial.write(self.PING)
             self.Serial.timeout = 1
             if self.Serial.read(1) != self.OK:
@@ -44,7 +45,7 @@ class autoSMSSerial:
         for port, desc, _ in sorted(self.ports):
             if "CH340" in desc:
                 try:
-                    ser = serial.Serial(port, 9600)
+                    ser = serial.Serial(port, self.BAUDRATE)
                 except:
                     continue
                 ser.write(self.PING)
