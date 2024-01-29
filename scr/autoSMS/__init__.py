@@ -39,7 +39,6 @@ class autoSMSSerial:
             self.Serial = self.auto_connect()
             if not self.Serial:
                 raise Exception("Can't find device, connect to device and try again")
-            self.Serial.timeout = 1
 
     def auto_connect(self) -> serial.Serial | None:
         for port, desc, _ in sorted(self.ports):
@@ -82,17 +81,17 @@ class autoSMSSerial:
     
     def read_phone_number(self) -> str:
         self._serial_write(self.READ_PHONE, f"Invalid method code: {self.READ_PHONE}")
-        phone = ""
+        phone = b''
         i = 0
         char = self.Serial.read(1)
         while char != self.END_PHONE:
-            phone += char.decode()
+            phone += char
             yield int(i)
             i += .08
             char = self.Serial.read(1)
         yield 100
         self.Serial.read(1)
-        return phone
+        return phone.decode()
     
     def write_phone_number(self, phone_number: str) -> None:
         self._serial_write(self.WRITE_PHONE, f"Invalid method, code: {self.WRITE_PHONE}")

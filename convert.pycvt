@@ -1,8 +1,8 @@
 [Setup]
 Converter = PyInstaller
 AppName = "autoSMSsetup"
-InputFile = E:\Information Technology\Python\App\AutoSMSSetup\scr\main.py
-OutputDir = E:\Information Technology\Python\App\AutoSMSSetup\Download
+InputFile = *ThisDir*\scr\main.py
+OutputDir = *ThisDir*\Download
 Icon = NONE
 
 [Option]
@@ -10,6 +10,6 @@ one-file
 no-console
 
 [Data]
-Source E:\Information Technology\Python\App\AutoSMSSetup\scr\ui\main.ui DestDir ui
+Source *ThisDir*\scr\ui\main.ui DestDir ui
 
 [Pathex]
